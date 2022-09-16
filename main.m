@@ -42,9 +42,22 @@ dsTrain = combine(pxdsTrain,imdsTrain);
 %% 576-by-768 pixels
 
 %Scale the ground truth data to the range [-1, 1]. This range matches the range of the final tanhLayer (Deep Learning Toolbox) in the generator network.
+    %Hyperbolic tangent (tanh) layer
 %Resize the image and labels to the output size of the network, 576-by-768 pixels, using bicubic and nearest neighbor downsampling, respectively.
 %Convert the single channel segmentation map to a 32-channel one-hot encoded segmentation map using the onehotencode (Deep Learning Toolbox) function.
 %Randomly flip image and pixel label pairs in the horizontal direction.
 
 
 dsTrain = transform(dsTrain,@(x) preprocessCamVidForPix2PixHD(x,imageSize));
+
+%% Create Generator Network
+
+generatorInputSize = [imageSize numClasses];
+%Create the pix2pixHD generator network using the pix2pixHDGlobalGenerator function.
+dlnetGenerator = pix2pixHDGlobalGenerator(generatorInputSize);
+
+% Display the network architecture.
+%analyzeNetwork(dlnetGenerator)
+
+
+%% Create Discriminator Network
