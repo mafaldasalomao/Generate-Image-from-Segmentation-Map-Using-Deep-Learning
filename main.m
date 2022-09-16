@@ -72,3 +72,14 @@ iscriminatorInputSizeScale1 = [imageSize numChannelsDiscriminator];
 dlnetDiscriminatorScale1 = patchGANDiscriminator(discriminatorInputSizeScale1,"NormalizationLayer","instance");
 discriminatorInputSizeScale2 = [floor(imageSize)./2 numChannelsDiscriminator];
 dlnetDiscriminatorScale2 = patchGANDiscriminator(discriminatorInputSizeScale2,"NormalizationLayer","instance");
+
+
+
+
+
+
+
+
+
+
+
