@@ -75,6 +75,45 @@ dlnetDiscriminatorScale2 = patchGANDiscriminator(discriminatorInputSizeScale2,"N
 
 
 
+%% Load Feature Extraction Network
+
+
+
+netVGG = vgg19;
+deepNetworkDesigner(netVGG)
+%keep the layers up to 'pool5' and remove all of the fully connected layers from the network.
+netVGG = layerGraph(netVGG.Layers(1:38));
+inp = imageInputLayer([imageSize 3],"Normalization","None","Name","Input");
+netVGG = replaceLayer(netVGG,"input",inp);
+netVGG = dlnetwork(netVGG);
+
+%% Specify Training Options
+%Specify identical options for the generator and discriminator networks
+%SSCB (spatial, spatial, channel, batch).
+numEpochs = 60;
+learningRate = 0.0002;
+trailingAvgGenerator = [];
+trailingAvgSqGenerator = [];
+trailingAvgDiscriminatorScale1 = [];
+trailingAvgSqDiscriminatorScale1 = [];
+trailingAvgDiscriminatorScale2 = [];
+trailingAvgSqDiscriminatorScale2 = [];
+gradientDecayFactor = 0.5;
+squaredGradientDecayFactor = 0.999;
+miniBatchSize = 1;
+
+mbqTrain = minibatchqueue(dsTrain,"MiniBatchSize",miniBatchSize, ...
+   "MiniBatchFormat","SSCB","DispatchInBackground",canUseGPU);
+
+%%Train the Network
+
+
+
+
+
+
+
+
 
 
 
