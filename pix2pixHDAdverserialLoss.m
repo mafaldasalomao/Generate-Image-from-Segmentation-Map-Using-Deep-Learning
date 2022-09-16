@@ -1,5 +1,8 @@
 function [DLoss,GLoss,realPredFtrsD,genPredFtrsD] = pix2pixHDAdverserialLoss(inpReal,inpGenerated,discriminator)
     %Adversarial Loss Function
+    %The helper function pix2pixHDAdverserialLoss computes the adversarial
+    % loss gradients for the generator and the discriminator.
+    % The function also returns feature maps of the real image and synthetic images
     % Discriminator layer names containing feature maps
     featureNames = {'act_top','act_mid_1','act_mid_2','act_tail','conv2d_final'};
     
