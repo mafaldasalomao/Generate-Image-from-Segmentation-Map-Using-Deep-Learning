@@ -61,14 +61,6 @@ dlnetGenerator = pix2pixHDGlobalGenerator(generatorInputSize);
 
 
 %% Create Discriminator Network
-%The input to the discriminator is the depth-wise concatenation of the
-% one-hot encoded segmentation maps and the scene image to be classified.
-% Specify the number of channels input to the discriminator as the total
-% number of labeled classes and image color channels.
+%
 numImageChannels = 3;
 numChannelsDiscriminator = numClasses + numImageChannels;
-
-iscriminatorInputSizeScale1 = [imageSize numChannelsDiscriminator];
-dlnetDiscriminatorScale1 = patchGANDiscriminator(discriminatorInputSizeScale1,"NormalizationLayer","instance");
-discriminatorInputSizeScale2 = [floor(imageSize)./2 numChannelsDiscriminator];
-dlnetDiscriminatorScale2 = patchGANDiscriminator(discriminatorInputSizeScale2,"NormalizationLayer","instance");
